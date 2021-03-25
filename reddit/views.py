@@ -22,4 +22,4 @@ class VoteCreate(generics.CreateAPIView):
     def get_queryset(self):
         user = self.request.user
         post = Post.objects.get(id=self.kwargs['pk'])
-        vote = Vote.objects.filter(voter=user, post=post)
+        return Vote.objects.filter(voter=user, post=post)
