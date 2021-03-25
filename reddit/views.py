@@ -23,3 +23,7 @@ class VoteCreate(generics.CreateAPIView):
         user = self.request.user
         post = Post.objects.get(id=self.kwargs['pk'])
         return Vote.objects.filter(voter=user, post=post)
+
+        def perform_create(self, serializers):
+            serializers.save(vote=self.request.user,
+                             post=Post.objects.get(id=self.kwargs['pk']))
